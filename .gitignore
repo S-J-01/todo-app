@@ -1,5 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,react,macos,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,react,macos,visualstudiocode
+
 
 ### macOS ###
 # General
@@ -206,4 +205,3 @@ sketch
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/node,react,macos,visualstudiocode
