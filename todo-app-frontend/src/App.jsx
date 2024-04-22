@@ -9,6 +9,18 @@ function App() {
   const [description,setDescription]=useState("")
   const [todos,setTodos]=useState([])
 
+  useEffect(()=>{
+  setInterval(()=>{
+    axios.get('http://localhost:3000/todos')
+    .then((response)=>{
+      console.log(response.data)
+      setTodos(response.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },500)
+  },[])
+
   const handleTitleChange = (event)=>{
    setTitle(event.target.value)
   }
@@ -27,6 +39,16 @@ function App() {
       console.log(err)
     })
   }
+
+  const onDelete = (idToBeDeleted)=>{
+    console.log('Inside onDelete. idToBeDeleted='+idToBeDeleted)
+    axios.delete('http://localhost:3000/todos/'+idToBeDeleted)
+    .then((response)=>{
+      console.log(response.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   return (
     <>
       Title:
@@ -36,6 +58,23 @@ function App() {
       <input type="text" value={description} onChange={handleDescriptionChange}  />
       &nbsp;
       <input type="button" value="Submit" onClick={onSubmit} />
+      <br /><br />
+      
+      {todos.map((todoObj)=>{
+        return(
+          <div>
+            Title:
+          {todoObj.title}
+          &nbsp;
+          Description:
+          {todoObj.description}
+          &nbsp;
+          <button type='button'  onClick={()=>onDelete(todoObj.id)}>Delete</button>
+          </div>
+
+        )
+      })}
+      
 
     </>
   )
