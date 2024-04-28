@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-function TodoForm (){
+function TodoForm (props){
+    const addTodo = props.addTodo
 
     const [title,setTitle]=useState("")
     const [description,setDescription]=useState("")
@@ -20,6 +21,9 @@ function TodoForm (){
         description:description
         }).then((response)=>{
         console.log(response.data)
+        addTodo(response.data)
+        setTitle("")
+        setDescription("")
         }).catch((err)=>{
         console.log(err)
         })
